@@ -2,9 +2,6 @@
 import requests
 import streamlit as st
 import os
-import pickle
-import urllib.parse
-from typing import List
 from dotenv import load_dotenv
 import os
 
@@ -20,8 +17,14 @@ import streamlit as st
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 
+st.set_page_config(
+    page_title="Emotion-Based Recommender",
+    layout="wide",  
+    initial_sidebar_state="auto"
+)
 
-# Set up client credentials manager
+
+# Credential Manager
 client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
@@ -139,12 +142,6 @@ top_n_counter_songs = get_top_songs(filtered_counter_songs)
 # -----------------------------
 # Display
 # -----------------------------
-st.set_page_config(
-    page_title="Emotion-Based Recommender",
-    layout="wide",  
-    initial_sidebar_state="auto"
-)
-
 if st.button('Show me recommended and counter emotion songs'):
     st.markdown(f"## Personalized Music Suggestions, displaying {len(top_n_recommended_songs)} songs")
 
